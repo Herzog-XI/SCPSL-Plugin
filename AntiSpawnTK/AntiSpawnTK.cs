@@ -2,6 +2,7 @@ using System;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
+using PlayerRoles;
 
 namespace AntiSpawnTK
 {
@@ -46,18 +47,18 @@ namespace AntiSpawnTK
             if ((DateTime.Now - lastSpawnTime).TotalSeconds >= Config.ProtectionDuration)
                 return;
 
-            if (IsMTFRole(ev.Attacker.Role.Name) && IsMTFRole(ev.Player.Role.Name))
+            if (IsMTFRole(ev.Attacker.Role.Type) && IsMTFRole(ev.Player.Role.Type))
             {
                 ev.IsAllowed = false;
             }
         }
 
-        private bool IsMTFRole(string roleName)
+        private bool IsMTFRole(RoleTypeId roleType)
         {
-            return roleName.Contains("NtfCaptain") ||
-                   roleName.Contains("NtfSergeant") ||
-                   roleName.Contains("NtfSpecialist") ||
-                   roleName.Contains("NtfPrivate");
+            return roleType == RoleTypeId.NtfCaptain ||
+                   roleType == RoleTypeId.NtfSergeant ||
+                   roleType == RoleTypeId.NtfSpecialist ||
+                   roleType == RoleTypeId.NtfPrivate;
         }
     }
 }
