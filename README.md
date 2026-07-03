@@ -17,12 +17,6 @@ A SCP: Secret Laboratory plugin that prevents MTF team kills during the initial 
 - Self-damage is **always allowed** (grenades will still blow you up)
 - After 30 seconds, normal PvP resumes
 
-## Installation
-
-1. Place `AntiSpawnTK.cs` in your plugins folder
-2. Restart the server or reload plugins
-3. Configure in your plugin config file (optional)
-
 ## Configuration
 
 ```yaml
