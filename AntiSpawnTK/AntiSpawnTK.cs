@@ -3,7 +3,6 @@ using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
 using PlayerRoles;
-using CustomPlayerClasses;
 
 namespace AntiSpawnTK
 {
@@ -48,7 +47,7 @@ namespace AntiSpawnTK
             if ((DateTime.Now - lastSpawnTime).TotalSeconds >= Config.ProtectionDuration)
                 return;
 
-            if (IsMTFRole(ev.Attacker.Role.RoleTypeCode) && IsMTFRole(ev.Player.Role.RoleTypeCode))
+            if (IsMTFRole(ev.Attacker.Role) && IsMTFRole(ev.Player.Role))
             {
                 ev.IsAllowed = false;
             }
