@@ -10,10 +10,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
     
     - name: Restore NuGet packages
       run: nuget restore AntiSpawnTK/AntiSpawnTK.csproj
@@ -21,26 +21,15 @@ jobs:
     - name: Build with MSBuild
       run: msbuild AntiSpawnTK/AntiSpawnTK.csproj /p:Configuration=Release /p:Platform="Any CPU"
     
-    - name: Create Release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload DLL to Release
+      uses: softprops/action-gh-release@v1
       with:
+        files: ./AntiSpawnTK/bin/Release/net48/AntiSpawnTK.dll
         tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
+        name: Release v${{ github.run_number }}
         body: |
           Automated build from commit ${{ github.sha }}
           
           Download the DLL below and place it in your plugins folder.
-        draft: false
-        prerelease: false
-    
-    - name: Upload DLL to Release
-      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./AntiSpawnTK/bin/Release/AntiSpawnTK.dll
-        asset_name: AntiSpawnTK.dll
-        asset_content_type: application/octet-stream
