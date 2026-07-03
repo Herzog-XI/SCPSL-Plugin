@@ -13,7 +13,7 @@
 
   <!-- NuGet Package References (Dependencies) -->
   <ItemGroup>
-    <PackageReference Include="EXILED" Version="8.10.1" />
+    <PackageReference Include="EXILED" Version="9.14.2.0" />
   </ItemGroup>
 
 </Project>
