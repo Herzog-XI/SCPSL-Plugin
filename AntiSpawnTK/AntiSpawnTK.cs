@@ -47,7 +47,7 @@ namespace AntiSpawnTK
             if ((DateTime.Now - lastSpawnTime).TotalSeconds >= Config.ProtectionDuration)
                 return;
 
-            if (IsMTFRole(ev.Attacker.Role) && IsMTFRole(ev.Player.Role))
+            if (IsMTFRole(ev.Attacker.Role.RoleTypeCode) && IsMTFRole(ev.Player.Role.RoleTypeCode))
             {
                 ev.IsAllowed = false;
             }
