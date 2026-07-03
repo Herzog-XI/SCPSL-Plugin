@@ -3,6 +3,7 @@ using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
 using PlayerRoles;
+using CustomPlayerClasses;
 
 namespace AntiSpawnTK
 {
