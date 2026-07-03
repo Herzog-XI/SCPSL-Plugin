@@ -1,4 +1,4 @@
-name: AntiSpawnTK 1.0
+name: Build and Release
 
 on:
   push:
@@ -12,16 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '4.8'
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v1
     
-    - name: Restore dependencies
-      run: dotnet restore AntiSpawnTK/AntiSpawnTK.csproj
+    - name: Restore NuGet packages
+      run: nuget restore AntiSpawnTK/AntiSpawnTK.csproj
     
-    - name: Build
-      run: dotnet build AntiSpawnTK/AntiSpawnTK.csproj --configuration Release --no-restore
+    - name: Build with MSBuild
+      run: msbuild AntiSpawnTK/AntiSpawnTK.csproj /p:Configuration=Release /p:Platform="Any CPU"
     
     - name: Create Release
       uses: actions/create-release@v1
